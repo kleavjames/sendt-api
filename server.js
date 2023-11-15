@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const errorHandler = require('./middlewares/error');
 const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/auth');
@@ -27,6 +28,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // routes
 app.use('/api/v1', authRoutes);
+
+// custom error handler middleware
+app.use(errorHandler);
 
 const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -16,6 +16,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   res.status(200).json({
       success: true,
       token,
+      message: 'Registration succesful.'
   });
 })
 
@@ -52,5 +53,6 @@ exports.login = asyncHandler(async (req, res, next) => {
   res.status(200).json({
       success: true,
       token,
+      message: 'Login successfully.',
   });
 })
