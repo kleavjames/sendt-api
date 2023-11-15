@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const connectDB = require('./config/db');
+
+const authRoutes = require('./routes/auth');
 
 // load env
 require('dotenv').config()
@@ -16,6 +19,14 @@ app.use(cors());
 
 // connect to database
 connectDB();
+
+// dev logger middleware
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// routes
+app.use('/api/v1', authRoutes);
 
 const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
